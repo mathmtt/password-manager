@@ -1,12 +1,13 @@
 import './App.css';
 import React from 'react';
+import Form from './components/Form';
+import Title from './components/Tittle';
 
 function App() {
   return (
     <div>
-      <h1>
-        Gerenciador de Senhas
-      </h1>
+      <Title />
+      <Form />
     </div>
   );
 }
