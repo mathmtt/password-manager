@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Validation from './validation';
 
 export type ButtonProps = () => void;
 export type ImputProps = {
@@ -17,7 +18,15 @@ const registerMain = {
 
 function Form() {
   const [register, setRegister] = useState(false);
-  const [registerForm, setRegisterForm] = useState(registerMain);
+  const [registerForm, setRegisterForm] = useState<ImputProps>(registerMain);
+  //   const validClass = 'valid-password';
+  //   const invalidClass = 'invalid-password';
+  //   const [verifyPassword, setVerifyPassword] = useState({
+  //     letrasENumeros: invalidClass,
+  //     special: invalidClass,
+  //     minL: invalidClass,
+  //     maxL: invalidClass,
+  // });
   const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterForm({
       ...registerForm, [e.target.name]: e.target.value,
@@ -73,6 +82,7 @@ function Form() {
                 value={ registerForm.password }
                 onChange={ handleForm }
               />
+              <Validation password={ registerForm.password } />
             </label>
             <label htmlFor="inputURL">
               URL
