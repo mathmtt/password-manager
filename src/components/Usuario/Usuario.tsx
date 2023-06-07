@@ -2,9 +2,10 @@ import { LoginForm } from '../ButtonProps';
 
 type UsuarioProps = {
   LoginProps: LoginForm[];
+  handleExcluir: (id: string | number | undefined) => void;
 };
 
-export default function Usuario({ LoginProps }: UsuarioProps) {
+export default function Usuario({ LoginProps, handleExcluir }: UsuarioProps) {
   return (
     <div>
       {LoginProps.length < 1 ? (
@@ -18,6 +19,12 @@ export default function Usuario({ LoginProps }: UsuarioProps) {
               </a>
               <p>{ elemento.login }</p>
               <p>{ elemento.password }</p>
+              <button
+                data-testid="remove-btn"
+                onClick={ () => handleExcluir(elemento.id) }
+              >
+                Apagar
+              </button>
             </div>
           ))}
         </div>

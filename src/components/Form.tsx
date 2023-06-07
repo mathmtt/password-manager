@@ -52,7 +52,6 @@ function Form({ LoginProp, CancelProp }: FormProps) {
   };
   return (
     <div>
-      (
       <form onSubmit={ (e) => LoginProp(e, registerForm) }>
         <label htmlFor="inputText">
           Nome do serviço
@@ -107,7 +106,6 @@ function Form({ LoginProp, CancelProp }: FormProps) {
         </button>
         <button type="button" onClick={ CancelProp }>Cancelar</button>
       </form>
-      )
     </div>
   );
 }

@@ -34,13 +34,16 @@ function App() {
   const apear = () => {
     setRegister(!register);
   };
+  const handleExcluir = (id: string | number | undefined) => {
+    setLoginForm(loginForm.filter((elemento) => elemento.id !== id));
+  };
   return (
     <div>
       <Title />
       {register
-        ? <button onClick={ apear }>Cadastrar nova senha</button>
+        ? <button onClick={ apear }> Cadastrar nova senha </button>
         : <Form LoginProp={ handleUsuario } CancelProp={ apear } /> }
-      <Usuario LoginProps={ loginForm } />
+      <Usuario LoginProps={ loginForm } handleExcluir={ handleExcluir } />
     </div>
   );
 }
