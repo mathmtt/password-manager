@@ -7,6 +7,12 @@ export type ImputProps = {
   login: string;
   password: string;
   URL: string;
+  id?: number;
+};
+
+export type FormProps = {
+  LoginProp: (e: React.FormEvent<HTMLFormElement>, registerForm: ImputProps) => void;
+  CancelProp: () => void;
 };
 
 const registerMain = {
@@ -16,8 +22,7 @@ const registerMain = {
   URL: '',
 };
 
-function Form() {
-  const [register, setRegister] = useState(false);
+function Form({ LoginProp, CancelProp }: FormProps) {
   const [registerForm, setRegisterForm] = useState<ImputProps>(registerMain);
   //   const validClass = 'valid-password';
   //   const invalidClass = 'invalid-password';
@@ -47,64 +52,62 @@ function Form() {
   };
   return (
     <div>
-      {
-        register ? (
-          <form>
-            <label htmlFor="inputText">
-              Nome do serviço
-              <input
-                type="text"
-                id="inputText"
-                name="job"
-                required
-                value={ registerForm.job }
-                onChange={ handleForm }
-              />
-            </label>
-            <label htmlFor="inputLogin">
-              Login
-              <input
-                type="text"
-                id="inputLogin"
-                name="login"
-                required
-                value={ registerForm.login }
-                onChange={ handleForm }
-              />
-            </label>
-            <label htmlFor="inputPassword">
-              Senha
-              <input
-                type="password"
-                id="inputPassword"
-                name="password"
-                required
-                value={ registerForm.password }
-                onChange={ handleForm }
-              />
-              <Check password={ registerForm.password } />
-            </label>
-            <label htmlFor="inputURL">
-              URL
-              <input
-                type="text"
-                id="inputURL"
-                name="URL"
-                required
-                value={ registerForm.URL }
-                onChange={ handleForm }
-              />
-            </label>
-            <button
-              disabled={ !loginTest() }
-              type="button"
-            >
-              Cadastrar
-            </button>
-            <button type="button" onClick={ () => setRegister(false) }>Cancelar</button>
-          </form>
-        ) : <button onClick={ () => setRegister(true) }>Cadastrar nova senha</button>
-    }
+      (
+      <form onSubmit={ (e) => LoginProp(e, registerForm) }>
+        <label htmlFor="inputText">
+          Nome do serviço
+          <input
+            type="text"
+            id="inputText"
+            name="job"
+            required
+            value={ registerForm.job }
+            onChange={ handleForm }
+          />
+        </label>
+        <label htmlFor="inputLogin">
+          Login
+          <input
+            type="text"
+            id="inputLogin"
+            name="login"
+            required
+            value={ registerForm.login }
+            onChange={ handleForm }
+          />
+        </label>
+        <label htmlFor="inputPassword">
+          Senha
+          <input
+            type="password"
+            id="inputPassword"
+            name="password"
+            required
+            value={ registerForm.password }
+            onChange={ handleForm }
+          />
+          <Check password={ registerForm.password } />
+        </label>
+        <label htmlFor="inputURL">
+          URL
+          <input
+            type="text"
+            id="inputURL"
+            name="URL"
+            required
+            value={ registerForm.URL }
+            onChange={ handleForm }
+          />
+        </label>
+        <button
+          disabled={ !loginTest() }
+          type="submit"
+        >
+          Cadastrar
+        </button>
+        <button type="button" onClick={ CancelProp }>Cancelar</button>
+      </form>
+      )
     </div>
   );
 }

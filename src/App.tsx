@@ -1,13 +1,46 @@
 import './App.css';
-import React from 'react';
-import Form from './components/Form';
+import React, { useState } from 'react';
 import Title from './components/Tittle';
+import Usuario from './components/Usuario/Usuario';
+import Form from './components/Form';
+
+type ImputProps = {
+  job: string;
+  login: string;
+  password: string;
+  URL: string;
+};
+
+type RegisterForm = ImputProps & {
+  id?: number;
+};
 
 function App() {
+  const [loginForm, setLoginForm] = useState<RegisterForm[]>([]);
+  const [register, setRegister] = useState(true);
+  const handleUsuario = (
+    e: React.FormEvent<HTMLFormElement>,
+    registerForm: RegisterForm,
+  ) => {
+    e.preventDefault();
+    setLoginForm([
+      ...loginForm, {
+        ...registerForm,
+        id: loginForm.length,
+      },
+    ]);
+    setRegister(true);
+  };
+  const apear = () => {
+    setRegister(!register);
+  };
   return (
     <div>
       <Title />
-      <Form />
+      {register
+        ? <button onClick={ apear }>Cadastrar nova senha</button>
+        : <Form LoginProp={ handleUsuario } CancelProp={ apear } /> }
+      <Usuario LoginProps={ loginForm } />
     </div>
   );
 }
