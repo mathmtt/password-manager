@@ -1,4 +1,4 @@
-function Validation({ password }: { password: string }) {
+export default function Check({ password }: { password: string }) {
   const regexWNvalid = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
   const specialCharvalid = /[^\w\s]/;
   const regexWN = regexWNvalid.test(password);
@@ -29,5 +29,3 @@ function Validation({ password }: { password: string }) {
     </div>
   );
 }
-
-export default Validation;

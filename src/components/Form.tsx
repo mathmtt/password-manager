@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Validation from './validation';
+import Check from './Validation/Validation';
 
 export type ButtonProps = () => void;
 export type ImputProps = {
@@ -82,7 +82,7 @@ function Form() {
                 value={ registerForm.password }
                 onChange={ handleForm }
               />
-              <Validation password={ registerForm.password } />
+              <Check password={ registerForm.password } />
             </label>
             <label htmlFor="inputURL">
               URL
